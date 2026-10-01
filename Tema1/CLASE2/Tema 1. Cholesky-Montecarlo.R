@@ -1,14 +1,19 @@
 #Aplicacion de montecarlo utilizando Cholesky
-library(quantmod)
-
+#Descargar datos de series de precios de acciones
+#library(quantmod)
 # Descargar datos de SANTANDER (SAN), IBERDROLA (IBE) y INDITEX (ITX)
-getSymbols(c("SAN.MC",
-             "IBE.MC",
-             "ITX.MC"), src = "yahoo", from = "2020-01-01")
+#getSymbols(c("SAN.MC",
+#             "IBE.MC",
+#             "ITX.MC"), src = "yahoo", from = "2020-01-01")
+#SAN <- Ad(`SAN.MC`)
+#IBE <- Ad(`IBE.MC`)
+#ITX <- Ad(`ITX.MC`)
 
-SAN <- Ad(`SAN.MC`)
-IBE <- Ad(`IBE.MC`)
-ITX <- Ad(`ITX.MC`)
+#save(SAN, IBE, ITX, precios, file = "PreciosAcciones.RData")
+
+
+load(file = "PreciosAcciones.RData")
+
 
 #Precios diarios de las acciones de SAN, IBE, ITX
 par(mfrow=c(1,3))
@@ -19,7 +24,7 @@ plot(ITX)
 #Unificamos la serie: 
 precios <- na.omit(merge(SAN, IBE, ITX))
 #save(precios, file = "PreciosAcciones.RData")
-#load(file = "PreciosAcciones.RData")
+precios
 
 colnames(precios) <- c("Santander", "Iberdrola", "Inditex")
 
@@ -215,3 +220,4 @@ plot(1:20, ultimos20, type="l", lwd=3, col="black",
 # Trayectorias simuladas
 for(i in 1:10){
   lines(20:(20+T), ST[i,], col="red4")}
+
